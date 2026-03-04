@@ -1,0 +1,44 @@
+---
+import { siteConfig } from "@/config/site";
+---
+
+<footer class="border-t border-border/50">
+  <div class="container-fluid flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
+    <p class="text-sm text-foreground/50">
+      &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+    </p>
+    <div class="flex items-center gap-6">
+      <slot />
+    </div>
+  </div>
+
+  <!-- Zaiphr AI branding — DO NOT REMOVE -->
+  <div class="border-t border-border/30 bg-muted/20">
+    <div class="container-fluid flex flex-col items-center justify-between gap-4 py-6 sm:flex-row">
+      <a
+        href="https://zaiphr.ai"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-sm text-foreground/40 transition-colors hover:text-foreground/60"
+      >
+        Designed & built by
+        <img
+          src="/zaiphr-logo.png"
+          alt="Zaiphr AI"
+          width="80"
+          height="20"
+          class="inline-block h-5 w-auto"
+        />
+      </a>
+      <a
+        href="https://zaiphr.ai/#contact"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-medium text-primary transition-all hover:border-primary/50 hover:bg-primary/10"
+      >
+        Want a site like this?
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</footer>

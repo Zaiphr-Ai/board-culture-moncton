@@ -1,0 +1,82 @@
+/*
+ * Utility classes — fluid typography, layout helpers, effects.
+ */
+
+/* Fluid typography scale */
+@utility text-fluid-xs {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+}
+
+@utility text-fluid-sm {
+  font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+}
+
+@utility text-fluid-base {
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+}
+
+@utility text-fluid-lg {
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+}
+
+@utility text-fluid-xl {
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+}
+
+@utility text-fluid-2xl {
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
+}
+
+@utility text-fluid-3xl {
+  font-size: clamp(1.875rem, 1.2rem + 3.3vw, 3.5rem);
+}
+
+@utility text-fluid-4xl {
+  font-size: clamp(2.25rem, 1.3rem + 4.8vw, 5rem);
+}
+
+/* Container fluid — full width with responsive padding */
+@utility container-fluid {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 3rem);
+}
+
+/* Glass effect */
+@utility glass {
+  background: oklch(from var(--color-background) l c h / 0.6);
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  border: 1px solid oklch(from var(--color-border) l c h / 0.3);
+}
+
+/* Grain texture overlay — apply to a ::before pseudo-element */
+@utility grain-texture {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Gradient text helper */
+@utility text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Balanced text wrapping */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}

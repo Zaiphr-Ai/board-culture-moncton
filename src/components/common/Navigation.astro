@@ -1,0 +1,72 @@
+---
+import { siteConfig } from "@/config/site";
+import type { NavigationLink } from "@/lib/types";
+
+interface Props {
+  links?: NavigationLink[];
+}
+
+const { links = [] } = Astro.props;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
+  <div class="container-fluid flex h-16 items-center justify-between">
+    <a href="/" class="font-heading text-lg font-semibold tracking-tight text-foreground">
+      {siteConfig.name}
+    </a>
+
+    {links.length > 0 && (
+      <div class="hidden items-center gap-8 md:flex">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <!-- Mobile menu button -->
+    <button
+      id="mobile-menu-btn"
+      class="flex items-center justify-center rounded-md p-2 text-foreground/70 transition-colors hover:text-foreground md:hidden"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  {links.length > 0 && (
+    <div id="mobile-menu" class="hidden border-t border-border/50 bg-background/95 backdrop-blur-md md:hidden">
+      <div class="container-fluid flex flex-col gap-4 py-4">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+</nav>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+
+  btn?.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+    menu?.classList.toggle("hidden");
+  });
+</script>

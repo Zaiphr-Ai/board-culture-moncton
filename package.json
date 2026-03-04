@@ -1,0 +1,27 @@
+{
+  "name": "demo-factory-template",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "format": "prettier --write .",
+    "screenshot": "playwright test e2e/screenshot.spec.ts",
+    "screenshot:open": "xdg-open screenshots/ 2>/dev/null || open screenshots/"
+  },
+  "dependencies": {
+    "astro": "^5.7.0",
+    "gsap": "^3.14.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "prettier": "^3.5.0",
+    "prettier-plugin-astro": "^0.14.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.0.0"
+  }
+}

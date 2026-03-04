@@ -1,0 +1,41 @@
+---
+import type { CardProps } from "@/lib/types";
+
+interface Props extends CardProps {
+  [key: string]: unknown;
+}
+
+const {
+  title,
+  description,
+  href,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  class:list={[
+    "group block rounded-xl border border-border/60 bg-background p-6 transition-all duration-300",
+    href && "hover:border-primary/40 hover:shadow-lg hover:-translate-y-1",
+    className,
+  ]}
+  {...(href ? { href } : {})}
+  {...rest}
+>
+  {title && (
+    <h3 class="font-heading text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+      {title}
+    </h3>
+  )}
+
+  {description && (
+    <p class="mt-2 text-sm text-foreground/60 leading-relaxed">
+      {description}
+    </p>
+  )}
+
+  <slot />
+</Tag>

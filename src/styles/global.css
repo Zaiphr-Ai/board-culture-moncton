@@ -1,0 +1,86 @@
+@import "tailwindcss";
+@import "./animations.css";
+@import "./utilities.css";
+
+/*
+ * Theme tokens — mapped from siteConfig colors.
+ * These CSS custom properties are set inline on <html> by BaseLayout.astro
+ * so that changing site.ts instantly changes the whole site.
+ */
+@theme {
+  --color-primary: var(--site-primary);
+  --color-secondary: var(--site-secondary);
+  --color-accent: var(--site-accent);
+  --color-background: var(--site-background);
+  --color-foreground: var(--site-foreground);
+  --color-muted: var(--site-muted);
+  --color-border: var(--site-border);
+
+  --font-heading: var(--site-font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--site-font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--site-font-mono), ui-monospace, monospace;
+}
+
+/* Animatable gradient properties */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-pos {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+/* Base reset and defaults */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+}
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+/* Focus visible styling */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

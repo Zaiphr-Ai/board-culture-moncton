@@ -1,0 +1,40 @@
+---
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  class?: string;
+}
+
+const {
+  headline = "Your next big idea starts here",
+  subheadline = "A beautifully crafted experience designed to captivate your audience and drive results.",
+  class: className = "",
+} = Astro.props;
+---
+
+<section class:list={["relative flex min-h-[85vh] items-center justify-center overflow-hidden pt-16", className]}>
+  <div class="container-fluid relative z-10 text-center">
+    <h1
+      class="text-fluid-4xl font-heading font-bold tracking-tight text-foreground text-balance"
+      data-animate="fade-up"
+    >
+      {headline}
+    </h1>
+
+    <p
+      class="mx-auto mt-6 max-w-2xl text-fluid-lg text-foreground/60 text-pretty"
+      data-animate="fade-up"
+      data-delay="0.15"
+    >
+      {subheadline}
+    </p>
+
+    <div
+      class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+      data-animate="fade-up"
+      data-delay="0.3"
+    >
+      <slot />
+    </div>
+  </div>
+</section>

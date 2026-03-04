@@ -1,0 +1,45 @@
+---
+import type { ButtonProps } from "@/lib/types";
+
+interface Props extends ButtonProps {
+  [key: string]: unknown;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+
+const baseClasses =
+  "inline-flex items-center justify-center font-medium transition-all duration-200 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+const variantClasses: Record<string, string> = {
+  primary:
+    "bg-primary text-background hover:opacity-90 active:scale-[0.98]",
+  secondary:
+    "bg-secondary text-background hover:opacity-90 active:scale-[0.98]",
+  outline:
+    "border-2 border-primary text-primary hover:bg-primary hover:text-background active:scale-[0.98]",
+  ghost:
+    "text-foreground/70 hover:bg-muted hover:text-foreground active:scale-[0.98]",
+};
+
+const sizeClasses: Record<string, string> = {
+  sm: "px-4 py-2 text-sm gap-1.5",
+  md: "px-6 py-2.5 text-base gap-2",
+  lg: "px-8 py-3.5 text-lg gap-2.5",
+};
+---
+
+<Tag
+  class:list={[baseClasses, variantClasses[variant], sizeClasses[size], className]}
+  {...(href ? { href } : {})}
+  {...rest}
+>
+  <slot />
+</Tag>

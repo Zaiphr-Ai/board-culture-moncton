@@ -1,0 +1,81 @@
+---
+import { siteConfig, getFontsUrl } from "@/config/site";
+import type { SEOProps } from "@/lib/types";
+import "@/styles/global.css";
+
+interface Props extends SEOProps {}
+
+const {
+  title,
+  description = siteConfig.description,
+  image,
+  canonicalUrl,
+} = Astro.props;
+
+const pageTitle = title
+  ? `${title} | ${siteConfig.name}`
+  : siteConfig.name;
+const fontsUrl = getFontsUrl();
+
+// Build CSS custom properties from siteConfig
+const themeVars = [
+  `--site-primary: ${siteConfig.colors.primary}`,
+  `--site-secondary: ${siteConfig.colors.secondary}`,
+  `--site-accent: ${siteConfig.colors.accent}`,
+  `--site-background: ${siteConfig.colors.background}`,
+  `--site-foreground: ${siteConfig.colors.foreground}`,
+  `--site-muted: ${siteConfig.colors.muted}`,
+  `--site-border: ${siteConfig.colors.border}`,
+  `--site-font-heading: "${siteConfig.fonts.heading}"`,
+  `--site-font-body: "${siteConfig.fonts.body}"`,
+  `--site-font-mono: "${siteConfig.fonts.mono || "JetBrains Mono"}"`,
+].join("; ");
+---
+
+<!doctype html>
+<html lang="en" style={themeVars}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fontsUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- SEO -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {image && <meta property="og:image" content={image} />}
+    {siteConfig.url && <meta property="og:url" content={siteConfig.url} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <slot />
+
+    <!-- GSAP init -->
+    <script>
+      import { initGSAP, kineticText } from "@/lib/gsap";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initGSAP();
+        kineticText();
+      });
+    </script>
+  </body>
+</html>

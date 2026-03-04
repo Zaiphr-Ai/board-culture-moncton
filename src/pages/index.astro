@@ -1,0 +1,102 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Navigation from "@/components/common/Navigation.astro";
+import Footer from "@/components/common/Footer.astro";
+import Hero from "@/components/sections/Hero.astro";
+import Button from "@/components/ui/Button.astro";
+import Card from "@/components/ui/Card.astro";
+
+const navLinks = [
+  { label: "Features", href: "#features" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+const features = [
+  {
+    title: "Lightning Fast",
+    description: "Built with performance in mind. Every millisecond counts when making a great first impression.",
+  },
+  {
+    title: "Beautifully Designed",
+    description: "Crafted with attention to detail. Every element serves a purpose and delights the eye.",
+  },
+  {
+    title: "Fully Responsive",
+    description: "Looks stunning on every device, from mobile phones to ultra-wide desktop monitors.",
+  },
+];
+---
+
+<BaseLayout>
+  <Navigation links={navLinks} />
+
+  <Hero>
+    <Button variant="primary" size="lg" href="#features">
+      Get Started
+    </Button>
+    <Button variant="outline" size="lg" href="#about">
+      Learn More
+    </Button>
+  </Hero>
+
+  <!-- Features Section -->
+  <section id="features" class="py-24">
+    <div class="container-fluid">
+      <div class="text-center" data-animate="fade-up">
+        <h2 class="text-fluid-3xl font-heading font-bold text-foreground text-balance">
+          Everything you need
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-foreground/60 text-pretty">
+          A complete toolkit for building remarkable digital experiences.
+        </p>
+      </div>
+
+      <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature, i) => (
+          <Card
+            title={feature.title}
+            description={feature.description}
+            data-animate="fade-up"
+            data-delay={String(i * 0.1)}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-muted/40 py-24">
+    <div class="container-fluid">
+      <div class="mx-auto max-w-2xl text-center" data-animate="fade-up">
+        <h2 class="text-fluid-3xl font-heading font-bold text-foreground text-balance">
+          Built for impact
+        </h2>
+        <p class="mt-6 text-foreground/60 text-pretty leading-relaxed">
+          This demo showcases what's possible when great design meets modern
+          technology. Every detail has been considered, from typography and
+          color to spacing and interaction.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-24">
+    <div class="container-fluid text-center" data-animate="fade-up">
+      <h2 class="text-fluid-2xl font-heading font-bold text-foreground text-balance">
+        Ready to get started?
+      </h2>
+      <p class="mx-auto mt-4 max-w-lg text-foreground/60 text-pretty">
+        Let's build something extraordinary together.
+      </p>
+      <div class="mt-8">
+        <Button variant="primary" size="lg" href="mailto:hello@example.com">
+          Get in Touch
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
