@@ -1,0 +1,105 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const categories = [
+  {
+    name: "DECKS",
+    description: "Complete setups & blank decks",
+    image: "https://picsum.photos/seed/decks-wall/800/600",
+    alt: "Collection of skateboard decks on display wall",
+    positionClass: "md:col-span-2 md:row-span-2 rotate-1",
+    zIndex: "z-30",
+  },
+  {
+    name: "WHEELS",
+    description: "All durometers, all sizes",
+    image: "https://picsum.photos/seed/skate-wheels/800/600",
+    alt: "Colorful assortment of skateboard wheels",
+    positionClass: "md:-mt-8 -rotate-1",
+    zIndex: "z-20",
+  },
+  {
+    name: "TRUCKS",
+    description: "Low, mid, high. We got 'em.",
+    image: "https://picsum.photos/seed/metal-trucks/800/600",
+    alt: "Skateboard trucks close up metal hardware",
+    positionClass: "md:-mt-4 rotate-2",
+    zIndex: "z-10",
+  },
+  {
+    name: "APPAREL",
+    description: "Tees, hoodies, hats",
+    image: "https://picsum.photos/seed/streetwear-hoodie/800/600",
+    alt: "Streetwear hoodie and skateboard apparel",
+    positionClass: "md:-mt-6 -rotate-2",
+    zIndex: "z-20",
+  },
+  {
+    name: "ACCESSORIES",
+    description: "Grip, bearings, hardware",
+    image: "https://picsum.photos/seed/skate-hardware/800/600",
+    alt: "Skateboard hardware and accessories close up",
+    positionClass: "md:-mt-8 rotate-1",
+    zIndex: "z-10",
+  },
+];
+---
+
+<section class:list={["py-24 bg-muted/30 overflow-hidden", className]}>
+  <div class="container-fluid mb-12">
+    <h2
+      class="font-heading font-bold text-fluid-4xl text-primary uppercase tracking-wider"
+      data-kinetic
+    >
+      GEAR UP
+    </h2>
+  </div>
+
+  <div class="container-fluid">
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 auto-rows-[280px]">
+      {categories.map((cat, i) => (
+        <a
+          href="#"
+          class:list={[
+            "category-card group relative overflow-hidden border-[3px] border-primary block cursor-pointer",
+            cat.positionClass,
+            cat.zIndex,
+          ]}
+          data-animate="fade-in"
+          data-delay={String(i * 0.1)}
+        >
+          <img
+            src={cat.image}
+            alt={cat.alt}
+            width="800"
+            height="600"
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover brightness-[.3] group-hover:brightness-50 transition-none"
+          />
+
+          <div class="absolute inset-0 flex flex-col justify-end p-6 z-10">
+            <h3 class="font-heading font-bold text-fluid-2xl text-foreground uppercase leading-none tracking-tight">
+              {cat.name}
+            </h3>
+            <p class="font-mono text-sm text-primary mt-2">
+              {cat.description}
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px var(--color-accent);
+    z-index: 50 !important;
+    transition: none;
+  }
+</style>

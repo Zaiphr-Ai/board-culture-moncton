@@ -1,0 +1,120 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const spots = [
+  {
+    name: "Riverfront Park",
+    difficulty: "Beginner",
+    difficultyClass: "bg-secondary",
+    features: "Mini ramp, quarterpipe, flat rails",
+    address: "735 Main St",
+    image: "https://picsum.photos/seed/skatepark-ramp/800/600",
+    alt: "Concrete skatepark with ramps and rails",
+    gridClass: "md:col-span-2 md:row-span-1",
+    delay: "0.1",
+  },
+  {
+    name: "Centennial Park Bowl",
+    difficulty: "Advanced",
+    difficultyClass: "bg-primary text-background",
+    features: "Deep bowl, pool coping, vert wall",
+    address: "St George Blvd",
+    image: "https://picsum.photos/seed/skatepark-bowl/800/600",
+    alt: "Deep concrete skatepark bowl",
+    gridClass: "md:col-span-1 md:row-span-2",
+    delay: "0.3",
+  },
+  {
+    name: "High Street Stairs",
+    difficulty: "Intermediate",
+    difficultyClass: "bg-accent",
+    features: "8-stair, handrail, ledges",
+    address: "High St & Main",
+    image: "https://picsum.photos/seed/urban-stairs/800/600",
+    alt: "Urban staircase with handrail skate spot",
+    gridClass: "md:col-span-1 md:row-span-1",
+    delay: "0.2",
+  },
+  {
+    name: "Downtown Rails",
+    difficulty: "Intermediate",
+    difficultyClass: "bg-accent",
+    features: "Street rails, manual pads, banks",
+    address: "Various downtown",
+    image: "https://picsum.photos/seed/street-rails/800/600",
+    alt: "Downtown urban skateboarding rails spot",
+    gridClass: "md:col-span-1 md:row-span-1",
+    delay: "0.4",
+  },
+  {
+    name: "UNBM Campus",
+    difficulty: "All levels",
+    difficultyClass: "bg-secondary",
+    features: "Stairs, ledges, gaps, smooth ground",
+    address: "165 Hébert Blvd",
+    image: "https://picsum.photos/seed/campus-concrete/800/600",
+    alt: "University campus concrete skateboarding location",
+    gridClass: "md:col-span-3 md:row-span-1",
+    delay: "0.15",
+  },
+];
+---
+
+<section id="spots" class:list={["py-24 bg-background", className]}>
+  <div class="container-fluid">
+    <h2
+      class="font-heading font-bold text-fluid-4xl text-primary uppercase tracking-wider mb-16"
+      data-kinetic
+    >
+      MONCTON SPOTS
+    </h2>
+
+    <div class="grid gap-4 grid-cols-1 md:grid-cols-3 auto-rows-[250px]">
+      {spots.map((spot) => (
+        <div
+          class:list={[
+            "spot-card group relative overflow-hidden border-2 border-primary cursor-pointer",
+            spot.gridClass,
+          ]}
+          data-animate="scale"
+          data-delay={spot.delay}
+        >
+          <img
+            src={spot.image}
+            alt={spot.alt}
+            width="800"
+            height="600"
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover brightness-[.4] group-hover:brightness-[.6] transition-none"
+          />
+
+          <div class="absolute inset-0 p-5 flex flex-col justify-between z-10">
+            <div>
+              <span class:list={["inline-block px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-3", spot.difficultyClass]}>
+                {spot.difficulty}
+              </span>
+              <h3 class="font-heading font-bold text-fluid-2xl text-foreground uppercase leading-none">
+                {spot.name}
+              </h3>
+            </div>
+
+            <div class="font-mono text-sm space-y-1">
+              <p class="text-primary">{spot.features}</p>
+              <p class="text-foreground/60">{spot.address}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .spot-card:hover {
+    box-shadow: 0 0 25px var(--color-primary);
+  }
+</style>

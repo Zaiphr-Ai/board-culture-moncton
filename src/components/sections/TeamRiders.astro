@@ -1,0 +1,109 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const riders = [
+  {
+    name: "JAKE LEBLANC",
+    stance: "Goofy",
+    homeSpot: "Riverfront Park",
+    sponsors: "Element, Spitfire",
+    instagram: "@jakeshreds",
+    image: "https://picsum.photos/seed/skater-jake/800/1200",
+    alt: "Skateboarder portrait in urban setting",
+    animDir: "fade-left",
+  },
+  {
+    name: "SARAH CORMIER",
+    stance: "Regular",
+    homeSpot: "Downtown Rails",
+    sponsors: "Baker, Bones",
+    instagram: "@sarahskates",
+    image: "https://picsum.photos/seed/skater-sarah/800/1200",
+    alt: "Skater portrait with skateboard black and white",
+    animDir: "fade-right",
+  },
+  {
+    name: "MARCUS THIBODEAU",
+    stance: "Goofy",
+    homeSpot: "High St Stairs",
+    sponsors: "Independent, Shake Junt",
+    instagram: "@marcusmoncton",
+    image: "https://picsum.photos/seed/skater-marcus/800/1200",
+    alt: "Urban skateboarder portrait close up",
+    animDir: "fade-left",
+  },
+  {
+    name: "EMMA RICHARD",
+    stance: "Regular",
+    homeSpot: "Centennial Park Bowl",
+    sponsors: "Girl, Ricta",
+    instagram: "@emmashreds506",
+    image: "https://picsum.photos/seed/skater-emma/800/1200",
+    alt: "Street skater portrait in action",
+    animDir: "fade-right",
+  },
+];
+---
+
+<section id="team" class:list={["py-24 bg-muted/30", className]}>
+  <div class="container-fluid">
+    <h2
+      class="font-heading font-bold text-fluid-4xl text-primary uppercase tracking-wider mb-16"
+      data-kinetic
+    >
+      THE CREW
+    </h2>
+
+    <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
+      {riders.map((rider, i) => (
+        <div
+          class="rider-card group relative overflow-hidden border border-primary min-h-[500px] grain-texture"
+          data-animate={rider.animDir}
+          data-delay={String(i * 0.15)}
+        >
+          <img
+            src={rider.image}
+            alt={rider.alt}
+            width="800"
+            height="1200"
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover brightness-50 contrast-125 grayscale group-hover:grayscale-0 transition-none"
+          />
+
+          <!-- Name overlay -->
+          <div class="absolute inset-0 flex flex-col justify-between p-6 z-10">
+            <h3
+              class="font-heading font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-primary uppercase leading-none tracking-tight mix-blend-difference"
+              data-kinetic
+            >
+              {rider.name}
+            </h3>
+
+            <!-- Stats -->
+            <div class="font-mono text-sm text-foreground/80 space-y-1">
+              <p><span class="text-primary">STANCE:</span> {rider.stance}</p>
+              <p><span class="text-primary">HOME SPOT:</span> {rider.homeSpot}</p>
+              <p><span class="text-primary">SPONSORS:</span> {rider.sponsors}</p>
+              <a
+                href="#"
+                class="inline-block text-accent hover:animate-text-glow transition-none"
+              >
+                {rider.instagram}
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .rider-card:hover {
+    box-shadow: 0 0 30px var(--color-primary);
+  }
+</style>

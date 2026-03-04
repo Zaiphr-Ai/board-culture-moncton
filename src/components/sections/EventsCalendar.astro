@@ -1,0 +1,127 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const events = [
+  {
+    name: "SHOP DEMO",
+    date: "March 15, 2026",
+    time: "2:00 PM",
+    location: "Riverfront Park",
+    description: "Local brands showcase, free stickers",
+  },
+  {
+    name: "STREET JAM",
+    date: "March 22, 2026",
+    time: "4:00 PM",
+    location: "Downtown Rails",
+    description: "Session the rails, prizes for best tricks",
+  },
+  {
+    name: "BOWL COMP",
+    date: "April 5, 2026",
+    time: "12:00 PM",
+    location: "Centennial Park",
+    description: "$500 prize pool, all ages",
+  },
+  {
+    name: "SHOP SESSION",
+    date: "Every Saturday",
+    time: "1:00 PM",
+    location: "Board Culture",
+    description: "Hang, skate, grab gear. Everyone welcome.",
+  },
+];
+
+const divider = "════════════════════════════════════════════════════════";
+---
+
+<section id="events" class:list={["py-24 bg-background grain-texture", className]}>
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="border-2 border-primary p-8 md:p-12">
+      <div class="mb-8" data-animate="fade-in">
+        <p class="font-mono text-sm text-foreground/50 mb-2">$ board-culture --events --upcoming</p>
+        <h2
+          class="font-heading font-bold text-fluid-3xl text-primary uppercase tracking-wider"
+          data-kinetic
+        >
+          UPCOMING SESSIONS
+        </h2>
+      </div>
+
+      <div class="space-y-0">
+        {events.map((event, i) => (
+          <div>
+            <div
+              class="font-mono text-primary/40 text-xs overflow-hidden whitespace-nowrap"
+              data-animate="fade-in"
+              data-delay={String(0.2 + i * 0.2)}
+            >
+              {divider}
+            </div>
+
+            <div
+              class="py-6"
+              data-animate="fade-in"
+              data-delay={String(0.3 + i * 0.2)}
+            >
+              <div class="flex items-start gap-3">
+                <span class="font-mono text-primary text-lg shrink-0">&gt;</span>
+                <div class="w-full">
+                  <h3
+                    class="font-heading font-bold text-xl md:text-2xl text-primary uppercase tracking-wide"
+                    data-kinetic
+                  >
+                    {event.name}
+                  </h3>
+                  <div class="font-mono text-sm mt-3 space-y-1">
+                    <p class="text-foreground">
+                      <span class="text-foreground/50">DATE:</span> {event.date}
+                      <span class="text-foreground/50 ml-4">TIME:</span> {event.time}
+                    </p>
+                    <p class="text-foreground">
+                      <span class="text-foreground/50">LOCATION:</span> {event.location}
+                    </p>
+                    <p class="text-accent mt-2">{event.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <div
+          class="font-mono text-primary/40 text-xs overflow-hidden whitespace-nowrap"
+          data-animate="fade-in"
+          data-delay="1.2"
+        >
+          {divider}
+        </div>
+
+        <!-- Blinking cursor -->
+        <div
+          class="font-mono text-primary text-lg mt-4 flex items-center gap-2"
+          data-animate="fade-in"
+          data-delay="1.4"
+        >
+          <span>&gt;</span>
+          <span class="cursor-blink">_</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>

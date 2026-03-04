@@ -1,0 +1,70 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const brands = [
+  { name: "Element", size: "text-5xl md:text-7xl", color: "text-primary", rotate: "rotate-3", top: "5%", left: "5%", delay: 0.1 },
+  { name: "Baker", size: "text-4xl md:text-6xl", color: "text-secondary", rotate: "-rotate-6", top: "10%", left: "55%", delay: 0.3 },
+  { name: "Girl", size: "text-3xl md:text-5xl", color: "text-accent", rotate: "rotate-12", top: "2%", left: "35%", delay: 0.5 },
+  { name: "Chocolate", size: "text-2xl md:text-4xl", color: "text-primary", rotate: "-rotate-3", top: "18%", left: "70%", delay: 0.2 },
+  { name: "Real", size: "text-5xl md:text-8xl", color: "text-foreground", rotate: "rotate-1", top: "22%", left: "15%", delay: 0.7 },
+  { name: "Spitfire", size: "text-4xl md:text-6xl", color: "text-secondary", rotate: "-rotate-2", top: "30%", left: "50%", delay: 0.4 },
+  { name: "Bones", size: "text-3xl md:text-5xl", color: "text-accent", rotate: "rotate-6", top: "35%", left: "2%", delay: 0.9 },
+  { name: "Ricta", size: "text-2xl md:text-3xl", color: "text-primary", rotate: "-rotate-12", top: "28%", left: "82%", delay: 0.6 },
+  { name: "OJ Wheels", size: "text-3xl md:text-4xl", color: "text-foreground", rotate: "rotate-3", top: "42%", left: "30%", delay: 0.1 },
+  { name: "Independent", size: "text-4xl md:text-7xl", color: "text-primary", rotate: "-rotate-1", top: "48%", left: "55%", delay: 0.8 },
+  { name: "Thunder", size: "text-3xl md:text-5xl", color: "text-secondary", rotate: "rotate-6", top: "52%", left: "5%", delay: 0.3 },
+  { name: "Venture", size: "text-2xl md:text-3xl", color: "text-accent", rotate: "-rotate-3", top: "55%", left: "75%", delay: 1.0 },
+  { name: "Shake Junt", size: "text-4xl md:text-6xl", color: "text-primary", rotate: "rotate-2", top: "62%", left: "20%", delay: 0.5 },
+  { name: "Mob Grip", size: "text-2xl md:text-4xl", color: "text-foreground", rotate: "-rotate-6", top: "65%", left: "60%", delay: 0.2 },
+  { name: "Grizzly", size: "text-3xl md:text-5xl", color: "text-secondary", rotate: "rotate-12", top: "70%", left: "40%", delay: 1.2 },
+  { name: "DGK", size: "text-5xl md:text-8xl", color: "text-accent", rotate: "-rotate-2", top: "72%", left: "80%", delay: 0.7 },
+  { name: "Enjoi", size: "text-3xl md:text-4xl", color: "text-primary", rotate: "rotate-3", top: "78%", left: "8%", delay: 1.4 },
+  { name: "Almost", size: "text-2xl md:text-3xl", color: "text-secondary", rotate: "-rotate-1", top: "80%", left: "50%", delay: 0.9 },
+  { name: "Plan B", size: "text-4xl md:text-6xl", color: "text-foreground", rotate: "rotate-6", top: "85%", left: "25%", delay: 1.1 },
+  { name: "Zero", size: "text-5xl md:text-7xl", color: "text-primary", rotate: "-rotate-12", top: "88%", left: "65%", delay: 0.4 },
+];
+---
+
+<section class:list={["py-24 bg-background overflow-hidden", className]}>
+  <div class="container-fluid mb-8">
+    <h2
+      class="font-heading font-bold text-fluid-3xl text-primary uppercase tracking-wider"
+      data-kinetic
+    >
+      WE CARRY THE BEST
+    </h2>
+  </div>
+
+  <div class="relative min-h-[60vh] md:min-h-[70vh]">
+    {brands.map((brand) => (
+      <span
+        class:list={[
+          "brand-name absolute font-heading font-bold uppercase cursor-default select-none whitespace-nowrap",
+          brand.size,
+          brand.color,
+          brand.rotate,
+        ]}
+        style={`top: ${brand.top}; left: ${brand.left};`}
+        data-animate="fade-in"
+        data-delay={String(brand.delay)}
+      >
+        {brand.name}
+      </span>
+    ))}
+  </div>
+</section>
+
+<style>
+  .brand-name {
+    transition: none;
+  }
+
+  .brand-name:hover {
+    text-shadow: 0 0 30px var(--color-primary), 0 0 60px var(--color-accent);
+    transform: scale(1.1);
+  }
+</style>

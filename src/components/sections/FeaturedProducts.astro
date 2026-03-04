@@ -1,0 +1,109 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const products = [
+  {
+    name: 'Element Section 8.0"',
+    price: "$79.99",
+    image: "https://picsum.photos/seed/skatedeck1/600/600",
+    alt: "Skateboard deck with graphic art close up",
+  },
+  {
+    name: 'Baker Brand Logo 8.25"',
+    price: "$69.99",
+    image: "https://picsum.photos/seed/skatedeck2/600/600",
+    alt: "Skateboard deck brand graphic design",
+  },
+  {
+    name: "Spitfire Formula Four 52mm",
+    price: "$44.99",
+    image: "https://picsum.photos/seed/skatewheels/600/600",
+    alt: "Skateboard wheels close up product shot",
+  },
+  {
+    name: "Independent Stage 11 Trucks",
+    price: "$59.99",
+    image: "https://picsum.photos/seed/skatetrucks/600/600",
+    alt: "Skateboard trucks metal hardware close up",
+  },
+  {
+    name: "Shake Junt Grip Tape",
+    price: "$12.99",
+    image: "https://picsum.photos/seed/griptape/600/600",
+    alt: "Grip tape texture close up on skateboard deck",
+  },
+  {
+    name: "Bones STF V5 Wheels 54mm",
+    price: "$49.99",
+    image: "https://picsum.photos/seed/bonewheels/600/600",
+    alt: "Skateboard wheels set product photography",
+  },
+];
+---
+
+<section id="shop" class:list={["py-24 bg-background", className]}>
+  <!-- Marquee heading -->
+  <div class="overflow-hidden border-y-2 border-primary py-4 mb-16">
+    <div class="marquee-track flex whitespace-nowrap">
+      {Array(4).fill(null).map(() => (
+        <span class="font-heading font-bold text-fluid-3xl text-primary uppercase tracking-widest mx-8">
+          NEW ARRIVALS &mdash; NEW ARRIVALS &mdash; NEW ARRIVALS &mdash;
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {products.map((product, i) => (
+        <div
+          class="product-card group relative border border-primary bg-background overflow-hidden cursor-pointer"
+          data-animate="scale"
+          data-delay={String(i * 0.08)}
+        >
+          <div class="aspect-square overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.alt}
+              width="600"
+              height="600"
+              loading="lazy"
+              class="w-full h-full object-cover transition-none group-hover:brightness-125"
+            />
+          </div>
+          <div class="p-4 border-t border-primary">
+            <h3 class="font-heading font-bold text-foreground text-lg uppercase tracking-wide">
+              {product.name}
+            </h3>
+            <div class="flex items-center justify-between mt-2">
+              <span class="font-mono text-primary text-xl font-bold">{product.price}</span>
+              <span class="font-mono text-sm text-foreground/0 group-hover:text-accent uppercase tracking-widest transition-none">
+                Add to Cart
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-track {
+    animation: marquee-scroll 20s linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .product-card:hover {
+    box-shadow: 0 0 20px var(--color-primary);
+    transform: translate(2px, -2px);
+  }
+</style>
